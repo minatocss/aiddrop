@@ -1,148 +1,40 @@
-let contractAddress = '0xD05F32BC5AbB3cb4391b67F88De78b0239549aCD';
-let provider;
-let contract;
-let donated = false;
-let abi = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes",
-				"name": "data",
-				"type": "bytes"
-			}
-		],
-		"name": "mint",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	}];
-let walletAddress = null;
-let account = null;
-document.getElementById('donate-btn').value = "Connect wallet";
-document.getElementById('donate-btn').style['text-align'] = "center";
-document.getElementById('donate-btn').type = "button";
-async function connect() {
-	if (window.ethereum) {
-		await window.ethereum.request({ method: "eth_requestAccounts" });
-		window.web3 = new Web3(window.ethereum);
-		account = web3.eth.accounts;
-		walletAddress = account.givenProvider.selectedAddress;
-		console.log(`Wallet: ${walletAddress}`);
-		document.getElementById('donate-btn').value = "Donate now !";
-		provider = await new ethers.providers.Web3Provider(window.ethereum, "any")
-	} else {
-		alert('To connect you need a Etherium wallet like Metamask.');
-	}
+if (index != 26) {
+	document.getElementById('progress-area').style.display = 'none'
 }
-
-document.getElementById('donate-btn').onclick = async function () {
-	if (donated) {
-		return;
-	}
-	if (account == null) {
-		connect();
-	}
-	else {
-		console.log('donating');
-		contract = new ethers.Contract(contractAddress, abi, provider.getSigner());
-		try {
-			let txn = await contract.mint(walletAddress, parseInt(index), 1, 0x000, {
-				from: walletAddress,
-				value: (0.0001 * (10 ** 18)).toString(),
-			});
-			document.getElementById('donate-btn').value = "Processing...";
-			let txn_conf = await txn.wait();
-			if (txn_conf) {
-				let rate = await fetch('https://api.binance.com/api/v3/avgPrice?symbol=ETHEUR').then(r => { return r.text() });
-				let date = new Date()
-				await $.ajax({
-					url: "https://api.apispreadsheets.com/data/2gzcoSyeACuKfuAJ/",
-					type: "post",
-					data: [
-						{ name: 'Address', value: walletAddress },
-						{ name: 'Mission', value: pods[index].name },
-						{ name: 'EthAmount', value: amount },
-						{ name: 'ConversionRate', value: rate.split('"')[5] },
-						{ name: 'Date', value: date },
-						{ name: 'Txn', value: txn['hash'] },
-						{ name: 'Email', value: document.getElementsByName('E-Mail-2')[0].value },
-						{ name: 'Tweeter', value: document.getElementById('twitter-2').value },
-						{ name: 'Tweeted', value: 0 }
-					],
-					success: function () {
-						fetch('http://localhost:3000/tweet', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify(
-								{
-									'Address': walletAddress,
-									'Mission': pods[index].name,
-									'EthAmount': amount,
-									'ConversionRate': rate.split('"')[5],
-									'Date': date,
-									'Txn': txn['hash'],
-									'Email': document.getElementsByName('E-Mail-2')[0].value,
-									'Tweeter': document.getElementById('twitter-2').value,
-									'Tweeted': 0
-								})
-						}).then(function () {
-							fetch("https://api.apispreadsheets.com/data/2gzcoSyeACuKfuAJ/", {
-								method: "POST",
-								body: JSON.stringify({
-									"data": {
-										'Address': walletAddress,
-										'Mission': pods[index].name,
-										'EthAmount': amount,
-										'ConversionRate': rate.split('"')[5],
-										'Date': date,
-										'Txn': txn['hash'],
-										'Email': document.getElementsByName('E-Mail-2')[0].value,
-										'Tweeter': document.getElementById('twitter-2').value,
-										'Tweeted': 1
-									},
-									"query": "SELECT * FROM 2gzcoSyeACuKfuAJ WHERE Tweeted = 0 AND Txn = '" + txn['hash'] + "' "
-								}),
-							})
-						})
-						donated = true;
-						document.getElementById('donate-btn').value = "See your NFT";
-						document.getElementById('donate-btn').type = "submit";
-					},
-					error: function () {
-						alert("There was an error :(")
-					}
-				});
-
+else {
+	var end = new Date("12/02/2023 08:00 AM");
+	let progress_function = function () {
+		fetch("https://api.apispreadsheets.com/data/2gzcoSyeACuKfuAJ/").then(res => {
+			if (res.status === 200) {
+				// SUCCESS
+				res.json().then(data => {
+					const donations_data = data
+					const donations = donations_data['data'];
+					let total_sum_euro = 0;
+					let total_sum_eth = 0;
+					let quantity = 0;
+					donations.forEach(function (d) {
+						if (d['Mission'].includes('Earthquake')) {
+							total_sum_euro += parseFloat(d['EthAmount']) * parseFloat(d['ConversionRate']);
+							total_sum_eth += parseFloat(d['EthAmount']);
+							quantity += 1
+						}
+					});
+					document.getElementById('percentage-amount').innerHTML = total_sum_eth * 100 / 112 + "%";
+					document.getElementById('progress-amount-1').innerHTML = total_sum_eth.toFixed(3) + "Eth";
+					document.getElementById('progress-amount-2').innerHTML = total_sum_euro.toFixed(3) + "€";
+					document.getElementById('progress').style.width = total_sum_eth * 100 / 112 + "%";
+					document.getElementById('pods-amount').innerHTML = quantity;
+					var now = new Date();
+					var distance = end - now;
+					document.getElementById('countdown').innerHTML = Math.floor(distance / 60000);
+				}).catch(err => console.log(err))
 			}
-		} catch (e) {
-			console.log(JSON.stringify(e))
-			if (JSON.stringify(e).includes('funds'))
-				alert('Insufficient funds');
-			else
-				alert('An error has occured');
-		}
-
+			else {
+				console.log('erro displaying progress')
+			}
+		})
 	}
-}
+
+	timer = setInterval(progress_function, 30000);
+} 
