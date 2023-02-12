@@ -71,7 +71,6 @@ app.post('/tweet', jsonParser, async (request, res) => {
             break
         }
     }
-    check = true
     if (data['Tweeted'] == 0 && check) {
         const tweeter = data['Tweeter'] != "" ? "by " + data['Tweeter'] : ""
         var postData = JSON.stringify({
