@@ -26,9 +26,8 @@ app.post('/tweet', jsonParser, async (request, res) => {
         'hostname': 'api.twitter.com',
         'path': '/2/tweets',
         'headers': {
-          'Authorization': 'OAuth oauth_consumer_key="JwjHo7Xm2AKNW6YHySNw0u0RU",oauth_token="1380785265250291713-4Nm3KDPkseefENSoGbQTLGs1GBV3DF",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1676169027",oauth_nonce="GfDbKldrZlO",oauth_version="1.0",oauth_signature="%2FY5vAhr7Jh6fe0cyMK1znxj9LYM%3D"',
           'Content-Type': 'application/json',
-          'Cookie': 'guest_id=v1%3A166914611148828072'
+          'Authorization': 'OAuth oauth_consumer_key="yarX9NxUREZBDYyxm1n69nw18",oauth_token="1380785265250291713-Jr3FNAQv8NOXLvYALXuzvojydfbHWi",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1683288822",oauth_nonce="3ObgMXstXzt",oauth_version="1.0",oauth_signature="ReEmgmwxbWTuHrpHFFWJPkvWdaU%3D"'
         },
         'maxRedirects': 20
       };
