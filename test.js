@@ -64,12 +64,12 @@ app.post('/tweet', jsonParser, async (request, res) => {
         'hostname': 'api.twitter.com',
         'path': '/2/tweets',
         'headers': {
-            'Content-Type': 'application/json',
-            'Authorization': 'OAuth oauth_consumer_key="NoYvWv8P4z0SZHkcRLkp0cAzC",oauth_token="1380785265250291713-pPYIEJj16vGhmIaYW9lSGqMOCADHRA",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1684952357",oauth_nonce="UeBw6avWl1P",oauth_version="1.0",oauth_signature="dCuFP1KKhdtYDo1v4tQyKlJ7UrA%3D"',
-            'Cookie': 'guest_id=v1%3A168339493226125481'
+          'Content-Type': 'application/json',
+          'Authorization': 'OAuth oauth_consumer_key="WyCzcDd0aQHoeIojjMmmcoDuv",oauth_token="1380785265250291713-jHo2sXGf28UrKne7Aq5UAqMDfbISYn",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685126615",oauth_nonce="PwOFpfkLgCn",oauth_version="1.0",oauth_signature="ZG3UGSI3uDoVJdLI5KKrXPHmcWo%3D"',
+          'Cookie': 'guest_id=v1%3A168339493226125481'
         },
         'maxRedirects': 20
-    };
+      };
     var req = https.request(options, function (res) {
         var chunks = [];
 
