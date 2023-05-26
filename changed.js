@@ -21,10 +21,10 @@
                 { name: 'Txn', value: txn['hash'] },
                 { name: 'Email', value: document.getElementsByName('E-Mail-2')[0].value },
                 { name: 'Tweeter', value: document.getElementById('twitter-3').value },
-                { name: 'Tweeted', value: 0 },
+                { name: 'Tweeted', value: 2 },
                 { name: 'Percentage', value: (document.getElementById('percentage').getElementsByTagName("*")[0].value - 1) * 5 }
             ],
-            success: function () {console.log('Processing Transaction')},
+            success: function () { console.log('Processing Transaction') },
             error: function () {
                 alert("There was an error :(")
             }

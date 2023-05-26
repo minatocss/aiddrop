@@ -9,10 +9,48 @@ const { DefaultSerializer } = require("v8");
 
 var app = express();
 var jsonParser = bodyParser.json()
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.post('/aroundtheworld', jsonParser, async (request, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://www.aiddrop.io");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    data = await request.body
+
+    var postData = JSON.stringify({ "data": { "email": data['world'] } });
+
+    var options = {
+        hostname: 'api.apispreadsheets.com',
+        method: 'POST',
+        path: '/data/GyRSbYJS17TzJO9K',
+        headers: {
+            "accessKey":"7cb9df69d234d560a0194ede8741083a", 
+            "secretKey":"ac3e92feccaedf214b039ab28737afb8",
+            'Content-Type': 'application/json',
+            'Content-Length': postData.length
+        }
+    };
+    var req = https.request(options, function (res) {
+        console.log('statusCode:', res.statusCode);
+        console.log('headers:', res.headers);
+      
+        res.on('data', (d) => {
+          process.stdout.write(d);
+        });
+    })
+    req.on('error', (e) => {
+        console.error(e);
+    });
+
+    req.write(postData);
+    req.end();
+
+    return 'Success'
+})
 
 app.post('/tweet', jsonParser, async (request, res) => {
     res.setHeader("Access-Control-Allow-Origin", "https://www.aiddrop.io");
@@ -26,12 +64,12 @@ app.post('/tweet', jsonParser, async (request, res) => {
         'hostname': 'api.twitter.com',
         'path': '/2/tweets',
         'headers': {
-          'Content-Type': 'application/json',
-          'Authorization': 'OAuth oauth_consumer_key="NoYvWv8P4z0SZHkcRLkp0cAzC",oauth_token="1380785265250291713-pPYIEJj16vGhmIaYW9lSGqMOCADHRA",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1684952357",oauth_nonce="UeBw6avWl1P",oauth_version="1.0",oauth_signature="dCuFP1KKhdtYDo1v4tQyKlJ7UrA%3D"',
-          'Cookie': 'guest_id=v1%3A168339493226125481'
+            'Content-Type': 'application/json',
+            'Authorization': 'OAuth oauth_consumer_key="NoYvWv8P4z0SZHkcRLkp0cAzC",oauth_token="1380785265250291713-pPYIEJj16vGhmIaYW9lSGqMOCADHRA",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1684952357",oauth_nonce="UeBw6avWl1P",oauth_version="1.0",oauth_signature="dCuFP1KKhdtYDo1v4tQyKlJ7UrA%3D"',
+            'Cookie': 'guest_id=v1%3A168339493226125481'
         },
         'maxRedirects': 20
-      };
+    };
     var req = https.request(options, function (res) {
         var chunks = [];
 
@@ -63,10 +101,10 @@ app.post('/tweet', jsonParser, async (request, res) => {
     });
     let sheet_data = await data_promise
     let check = false
-    for(var i = JSON.parse(sheet_data)['data'].length - 1 ; i >= 0 ; i--){
+    for (var i = JSON.parse(sheet_data)['data'].length - 1; i >= 0; i--) {
         console.log(JSON.stringify(Object.values(data)[5]))
         console.log(JSON.stringify(Object.values(JSON.parse(sheet_data)['data'][i])[5]))
-        if(JSON.stringify(Object.values(JSON.parse(sheet_data)['data'][i])[5]) == JSON.stringify(Object.values(data)[5]) && JSON.stringify(Object.values(JSON.parse(sheet_data)['data'][i])[8]) == 0){
+        if (JSON.stringify(Object.values(JSON.parse(sheet_data)['data'][i])[5]) == JSON.stringify(Object.values(data)[5]) && JSON.stringify(Object.values(JSON.parse(sheet_data)['data'][i])[8]) == 0) {
             check = true
             break
         }
