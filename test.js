@@ -28,8 +28,8 @@ app.post('/aroundtheworld', jsonParser, async (request, res) => {
         method: 'POST',
         path: '/data/GyRSbYJS17TzJO9K',
         headers: {
-            "accessKey":"7cb9df69d234d560a0194ede8741083a", 
-            "secretKey":"ac3e92feccaedf214b039ab28737afb8",
+            "accessKey": "7cb9df69d234d560a0194ede8741083a",
+            "secretKey": "ac3e92feccaedf214b039ab28737afb8",
             'Content-Type': 'application/json',
             'Content-Length': postData.length
         }
@@ -37,9 +37,9 @@ app.post('/aroundtheworld', jsonParser, async (request, res) => {
     var req = https.request(options, function (res) {
         console.log('statusCode:', res.statusCode);
         console.log('headers:', res.headers);
-      
+
         res.on('data', (d) => {
-          process.stdout.write(d);
+            process.stdout.write(d);
         });
     })
     req.on('error', (e) => {
@@ -64,12 +64,12 @@ app.post('/tweet', jsonParser, async (request, res) => {
         'hostname': 'api.twitter.com',
         'path': '/2/tweets',
         'headers': {
-          'Content-Type': 'application/json',
-          'Authorization': 'OAuth oauth_consumer_key="QdYiBz6TPYdcXFQnj1GJHSkaM",oauth_token="1380785265250291713-WKefQ8bkHthjYuRelqjBJPcx9nsqXN",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685449159",oauth_nonce="SwwT9pDXHhr",oauth_version="1.0",oauth_signature="ZW9Q25Oglji%2B%2FqHA%2BGbYK6eWTew%3D"',
-          'Cookie': 'guest_id=v1%3A168339493226125481'
+            'Content-Type': 'application/json',
+            'Authorization': 'OAuth oauth_consumer_key="xZVOONTNHuObpLNROpRGcLOxT",oauth_token="1380785265250291713-a7qLXMkOz2BGHPNQrXC3ic0akDkB3N",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685531494",oauth_nonce="TQyCtTtoITb",oauth_version="1.0",oauth_signature="VQR3Knin9eLcPN0eASK70NhXWUw%3D"',
+            'Cookie': 'guest_id=v1%3A168339493226125481'
         },
         'maxRedirects': 20
-      };
+    };
     var req = https.request(options, function (res) {
         var chunks = [];
 
