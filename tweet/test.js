@@ -24,15 +24,15 @@ app.post('/aroundtheworld', jsonParser, async (request, res) => {
     var postData = JSON.stringify({ "data": { "email": data['world'] } });
 
     var options = {
-        hostname: 'api.apispreadsheets.com',
-        method: 'POST',
-        path: '/data/GyRSbYJS17TzJO9K',
-        headers: {
-            "accessKey": "7cb9df69d234d560a0194ede8741083a",
-            "secretKey": "ac3e92feccaedf214b039ab28737afb8",
+        'method': 'POST',
+        'hostname': 'api.twitter.com',
+        'path': '/2/tweets',
+        'headers': {
             'Content-Type': 'application/json',
-            'Content-Length': postData.length
-        }
+            'Authorization': 'OAuth oauth_consumer_key="JIeJbrZn8EDWV9XEADRnehdHz",oauth_token="1380785265250291713-DXIyXEjQURXrXb0i1nKaBRIcz3gyiC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685711451",oauth_nonce="q411rTpGoEe",oauth_version="1.0",oauth_signature="ALG5bK2JFnqneRH3GtKZW22Ckn8%3D"',
+            'Cookie': 'guest_id=v1%3A168339493226125481'
+        },
+        'maxRedirects': 20
     };
     var req = https.request(options, function (res) {
         console.log('statusCode:', res.statusCode);
