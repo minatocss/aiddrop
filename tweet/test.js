@@ -29,7 +29,7 @@ app.post('/aroundtheworld', jsonParser, async (request, res) => {
         'path': '/2/tweets',
         'headers': {
             'Content-Type': 'application/json',
-            'Authorization': 'OAuth oauth_consumer_key="JIeJbrZn8EDWV9XEADRnehdHz",oauth_token="1380785265250291713-DXIyXEjQURXrXb0i1nKaBRIcz3gyiC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685711451",oauth_nonce="q411rTpGoEe",oauth_version="1.0",oauth_signature="ALG5bK2JFnqneRH3GtKZW22Ckn8%3D"',
+            'Authorization': 'OAuth oauth_consumer_key="JIeJbrZn8EDWV9XEADRnehdHz",oauth_token="1380785265250291713-DXIyXEjQURXrXb0i1nKaBRIcz3gyiC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685711669",oauth_nonce="6gqPrTDxak1",oauth_version="1.0",oauth_signature="O7CqFtOejoaGHpqmZ9vPfJIH9pA%3D"',
             'Cookie': 'guest_id=v1%3A168339493226125481'
         },
         'maxRedirects': 20
