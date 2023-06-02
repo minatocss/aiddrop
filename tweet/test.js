@@ -24,15 +24,15 @@ app.post('/aroundtheworld', jsonParser, async (request, res) => {
     var postData = JSON.stringify({ "data": { "email": data['world'] } });
 
     var options = {
-        'method': 'POST',
-        'hostname': 'api.twitter.com',
-        'path': '/2/tweets',
-        'headers': {
+        hostname: 'api.apispreadsheets.com',
+        method: 'POST',
+        path: '/data/GyRSbYJS17TzJO9K',
+        headers: {
+            "accessKey": "7cb9df69d234d560a0194ede8741083a",
+            "secretKey": "ac3e92feccaedf214b039ab28737afb8",
             'Content-Type': 'application/json',
-            'Authorization': 'OAuth oauth_consumer_key="JIeJbrZn8EDWV9XEADRnehdHz",oauth_token="1380785265250291713-DXIyXEjQURXrXb0i1nKaBRIcz3gyiC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685711669",oauth_nonce="6gqPrTDxak1",oauth_version="1.0",oauth_signature="O7CqFtOejoaGHpqmZ9vPfJIH9pA%3D"',
-            'Cookie': 'guest_id=v1%3A168339493226125481'
-        },
-        'maxRedirects': 20
+            'Content-Length': postData.length
+        }
     };
     var req = https.request(options, function (res) {
         console.log('statusCode:', res.statusCode);
@@ -65,7 +65,7 @@ app.post('/tweet', jsonParser, async (request, res) => {
         'path': '/2/tweets',
         'headers': {
             'Content-Type': 'application/json',
-            'Authorization': 'OAuth oauth_consumer_key="ny3Zofr9X9hRcUV3BSy9XR5mQ",oauth_token="2173809991-7dWAtSuyRtjyYI19lgcgamkdlRPlpK2halXFa4g",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685710748",oauth_nonce="4KgBis0l33N",oauth_version="1.0",oauth_signature="sR51KRd0okSPQNEyYtEyP5mJVsQ%3D"',
+            'Authorization': 'OAuth oauth_consumer_key="JIeJbrZn8EDWV9XEADRnehdHz",oauth_token="1380785265250291713-DXIyXEjQURXrXb0i1nKaBRIcz3gyiC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685711669",oauth_nonce="6gqPrTDxak1",oauth_version="1.0",oauth_signature="O7CqFtOejoaGHpqmZ9vPfJIH9pA%3D"',
             'Cookie': 'guest_id=v1%3A168339493226125481'
         },
         'maxRedirects': 20
