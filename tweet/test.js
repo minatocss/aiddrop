@@ -58,7 +58,7 @@ app.post('/tweet', jsonParser, async (request, res) => {
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
     );
-    data = await request.body
+    data = await request.body;
     var options = {
         'method': 'POST',
         'hostname': 'api.twitter.com',
