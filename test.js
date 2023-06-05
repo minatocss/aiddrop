@@ -60,15 +60,15 @@ app.post('/tweet', jsonParser, async (request, res) => {
     );
     data = await request.body
     var options = {
-        'method': 'POST',
-        'hostname': 'api.twitter.com',
-        'path': '/2/tweets',
-        'headers': {
-            'Content-Type': 'application/json',
-            'Authorization': 'OAuth oauth_consumer_key="JIeJbrZn8EDWV9XEADRnehdHz",oauth_token="1380785265250291713-DXIyXEjQURXrXb0i1nKaBRIcz3gyiC",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685711669",oauth_nonce="6gqPrTDxak1",oauth_version="1.0",oauth_signature="O7CqFtOejoaGHpqmZ9vPfJIH9pA%3D"',
-            'Cookie': 'guest_id=v1%3A168339493226125481'
-        },
-        'maxRedirects': 20
+      'method': 'POST',
+      'hostname': 'api.twitter.com',
+      'path': '/2/tweets',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': 'OAuth oauth_consumer_key="kXYMXBiw0xEcu682AcD2uyx5k",oauth_token="1380785265250291713-AfBmn2jx8PgrzYaigsXXP7q33XAupV",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1685969814",oauth_nonce="8zo1h5TcG1U",oauth_version="1.0",oauth_signature="i4oBkGAkjw9mgBs9A9IO1NkPJY8%3D"',
+        'Cookie': 'guest_id=v1%3A168596981434052524'
+      },
+      'maxRedirects': 20
     };
     var req = https.request(options, function (res) {
         var chunks = [];
